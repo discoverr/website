@@ -4,8 +4,13 @@ import React from "react";
 import useMedia from "react-use/lib/useMedia";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import styled from "styled-components";
+import FullScreen from "mobile-safari-fullscreen";
+import "mobile-safari-fullscreen/dist/index.module.css";
 
 import { hoverProps } from "../components/Hoverable";
+
+import { X } from "react-feather";
+import { RemoveScroll } from "react-remove-scroll";
 
 const item = {
   hidden: { opacity: 0 },
@@ -196,121 +201,134 @@ export default () => {
 
       <AnimatePresence>
         {selectedItem && (
-          <motion.div
-            style={{
-              position: "fixed",
-              top: 0,
-              right: 0,
-              left: 0,
-              bottom: 0,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <FullScreen classNames={{ iosFix: "iosFix" }} isOpen={true}>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               style={{
-                position: "absolute",
+                position: "fixed",
                 top: 0,
                 right: 0,
-                bottom: 0,
                 left: 0,
-                backgroundColor: "#fff",
+                bottom: 0,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <button
-                style={{ position: "absolute", top: 30, right: 30 }}
-                onClick={() => setSelectedItem(null)}
-                {...hoverProps}
-              >
-                Close
-              </button>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{
-                maxWidth: 1100,
-                position: "relative",
-                zIndex: 2,
-              }}
-            >
-              <div
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  left: 0,
+                  backgroundColor: "#fff",
                 }}
               >
-                <motion.div
-                  layoutId={selectedItem.id}
+                <button
                   style={{
-                    position: "relative",
-                    width: "329px",
-                    minWidth: "329px",
-                    height: "329px",
-                    backgroundColor: selectedItem.backgroundColor,
-                    // backgroundImage:
-                    //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
-                    backgroundSize: "cover",
+                    position: "absolute",
+                    top: 30,
+                    right: 30,
+                    padding: 0,
+                    margin: 0,
+                    border: "none",
+                    outline: "none",
+                    backgroundColor: "transparent",
                   }}
+                  onClick={() => setSelectedItem(null)}
                   {...hoverProps}
-                ></motion.div>
-                <div
+                >
+                  <X size={40} />
+                </button>
+              </motion.div>
+              <RemoveScroll>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   style={{
-                    paddingLeft: 90,
+                    maxWidth: 1100,
+                    position: "relative",
+                    zIndex: 2,
                   }}
                 >
-                  <h3
+                  <div
                     style={{
-                      margin: 0,
-                      padding: 0,
-                      paddingBottom: 60,
-                      flexGrow: 1,
-                      fontSize: 42,
-                      fontFamily: "Montserrat",
-                      fontWeight: 700,
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
                     }}
                   >
-                    The public is more familiar with bad design than good
-                    design.
-                  </h3>
-                  <p
-                    style={{
-                      position: "relative",
-                      fontSize: "16px",
-                      fontFamily: "Montserrat",
-                      lineHeight: 1.8,
-                      margin: 0,
-                      padding: 0,
-                      paddingLeft: 100,
-                      color: "#444",
-                    }}
-                  >
-                    <span
+                    <motion.div
+                      layoutId={selectedItem.id}
                       style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: 2,
-                        height: 60,
-                        backgroundColor: "#000",
+                        position: "relative",
+                        width: "329px",
+                        minWidth: "329px",
+                        height: "329px",
+                        backgroundColor: selectedItem.backgroundColor,
+                        // backgroundImage:
+                        //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+                        backgroundSize: "cover",
                       }}
-                    ></span>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Vivamus non vulputate ipsum, id dignissim ante. Cras posuere
-                    eros justo, pulvinar dignissim neque cursus non. Ut sed
-                    purus vestibulum lacus tristique bibendum.
-                  </p>
-                </div>
-              </div>
+                      {...hoverProps}
+                    ></motion.div>
+                    <div
+                      style={{
+                        paddingLeft: 90,
+                      }}
+                    >
+                      <h3
+                        style={{
+                          margin: 0,
+                          padding: 0,
+                          paddingBottom: 60,
+                          flexGrow: 1,
+                          fontSize: 42,
+                          fontFamily: "Montserrat",
+                          fontWeight: 700,
+                        }}
+                      >
+                        The public is more familiar with bad design than good
+                        design.
+                      </h3>
+                      <p
+                        style={{
+                          position: "relative",
+                          fontSize: "16px",
+                          fontFamily: "Montserrat",
+                          lineHeight: 1.8,
+                          margin: 0,
+                          padding: 0,
+                          paddingLeft: 100,
+                          color: "#444",
+                        }}
+                      >
+                        <span
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: 2,
+                            height: 60,
+                            backgroundColor: "#000",
+                          }}
+                        ></span>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Vivamus non vulputate ipsum, id dignissim ante. Cras
+                        posuere eros justo, pulvinar dignissim neque cursus non.
+                        Ut sed purus vestibulum lacus tristique bibendum.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </RemoveScroll>
             </motion.div>
-          </motion.div>
+          </FullScreen>
         )}
       </AnimatePresence>
     </AnimateSharedLayout>
