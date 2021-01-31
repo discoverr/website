@@ -197,7 +197,7 @@ const PageHero = styled(motion.div)({
   "@media (min-width: 1200px)": {},
 });
 
-const xsPageItemSize = 210;
+const xsPageItemSize = 190;
 const smPageItemSize = 240;
 const mdPageItemSize = 280;
 const lgPageItemSize = 330;
