@@ -12,7 +12,7 @@ const item = {
 const GridItem = (props: {
   layoutId: string;
   size: number;
-  item: any;
+  backgroundColor: string;
   onSelect: () => void;
 }) => {
   return (
@@ -20,7 +20,7 @@ const GridItem = (props: {
       layoutId={props.layoutId}
       variants={item}
       style={{
-        backgroundColor: props.item.backgroundColor,
+        backgroundColor: props.backgroundColor,
         gridColumn: "span " + props.size,
         gridRow: "span " + props.size,
       }}
@@ -28,6 +28,78 @@ const GridItem = (props: {
     >
       <div style={{ display: "block", width: "100%", paddingTop: "100%" }} />
     </motion.div>
+  );
+};
+
+const GridSection = ({
+  color,
+  mainRight,
+  mainItem,
+  item1,
+  item2,
+  item3,
+  item4,
+  onSelect,
+}: {
+  color: string;
+  mainRight?: boolean;
+  mainItem: any;
+  item1: any;
+  item2: any;
+  item3: any;
+  item4: any;
+  onSelect: (item: any) => void;
+}) => {
+  const isOverXS = true;
+  return (
+    <React.Fragment>
+      {(!mainRight || !isOverXS) && (
+        <GridItem
+          key={mainItem.id}
+          layoutId={mainItem.id}
+          backgroundColor={color}
+          size={2}
+          onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
+        />
+      )}
+      <GridItem
+        key={item1.id}
+        layoutId={item1.id}
+        backgroundColor={color}
+        size={1}
+        onSelect={() => onSelect({ ...item1, backgroundColor: color })}
+      />
+      <GridItem
+        key={item2.id}
+        layoutId={item2.id}
+        backgroundColor={color}
+        size={1}
+        onSelect={() => onSelect({ ...item2, backgroundColor: color })}
+      />
+      {mainRight && isOverXS && (
+        <GridItem
+          key={mainItem.id}
+          layoutId={mainItem.id}
+          backgroundColor={color}
+          size={2}
+          onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
+        />
+      )}
+      <GridItem
+        key={item3.id}
+        layoutId={item3.id}
+        backgroundColor={color}
+        size={1}
+        onSelect={() => onSelect({ ...item3, backgroundColor: color })}
+      />
+      <GridItem
+        key={item4.id}
+        layoutId={item4.id}
+        backgroundColor={color}
+        size={1}
+        onSelect={() => onSelect({ ...item4, backgroundColor: color })}
+      />
+    </React.Fragment>
   );
 };
 
@@ -72,84 +144,6 @@ const GridItem = (props: {
 //   );
 // };
 
-const boxes = [
-  {
-    id: "1",
-    size: 2,
-    backgroundColor: "#000000",
-  },
-  {
-    id: "2",
-    size: 1,
-    backgroundColor: "#000000",
-  },
-  {
-    id: "3",
-    size: 1,
-    backgroundColor: "#000000",
-  },
-  {
-    id: "4",
-    size: 1,
-    backgroundColor: "#000000",
-  },
-  {
-    id: "5",
-    size: 1,
-    backgroundColor: "#000000",
-  },
-  {
-    id: "6",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "7",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "8",
-    size: 2,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "9",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "10",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "11",
-    size: 2,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "12",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "13",
-    size: 0,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "14",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-  {
-    id: "15",
-    size: 1,
-    backgroundColor: "#f2f2f2",
-  },
-];
-
 const container = {
   hidden: {},
   enter: {
@@ -158,6 +152,36 @@ const container = {
     },
   },
   hide: {},
+};
+
+// const xsGridItemSize = 150;
+
+// const xsStyle = {
+//   display: "grid",
+//   gridTemplateColumns: `repeat(2, ${xsGridItemSize}px)`,
+//   gridTemplateRows: `repeat(${xsGridItemSize}px)`,
+//   columnGap: 30,
+//   rowGap: 30,
+// };
+
+// const smGridItemSize = 158;
+
+// const smStyle = {
+//   display: "grid",
+//   gridTemplateColumns: `repeat(4, ${smGridItemSize}px)`,
+//   gridTemplateRows: `repeat(${smGridItemSize}px)`,
+//   columnGap: 30,
+//   rowGap: 30,
+// };
+
+const mdGridItemSize = 270;
+
+const mdStyle = {
+  display: "grid",
+  gridTemplateColumns: `repeat(4, ${mdGridItemSize}px)`,
+  gridTemplateRows: `repeat(${mdGridItemSize}px)`,
+  columnGap: 30,
+  rowGap: 30,
 };
 
 export default () => {
@@ -175,22 +199,27 @@ export default () => {
         variants={container}
         initial="hidden"
         animate={selectedItem === null ? "enter" : "hide"}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 329px)",
-          gridTemplateRows: "repeat(329px)",
-          columnGap: 30,
-          rowGap: 30,
-        }}
+        style={mdStyle}
       >
-        {boxes.map((item) => (
-          <GridItem
-            layoutId={item.id}
-            item={item}
-            size={item.size}
-            onSelect={() => setSelectedItem(item)}
-          />
-        ))}
+        <GridSection
+          color="#000"
+          mainItem={{ id: 1 }}
+          item1={{ id: 2 }}
+          item2={{ id: 3 }}
+          item3={{ id: 4 }}
+          item4={{ id: 5 }}
+          onSelect={setSelectedItem}
+        />
+        <GridSection
+          color="#f2f2f2"
+          mainRight
+          mainItem={{ id: 6 }}
+          item1={{ id: 7 }}
+          item2={{ id: 8 }}
+          item3={{ id: 9 }}
+          item4={{ id: 10 }}
+          onSelect={setSelectedItem}
+        />
       </motion.div>
 
       <AnimatePresence>

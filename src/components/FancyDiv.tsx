@@ -1,6 +1,6 @@
 import React from "react";
 
 const FancyDiv: React.FC = ({ children }) => {
-  return <div style={{ width: 1406, margin: "auto auto" }}>{children}</div>;
+  return <div style={{}}>{children}</div>;
 };
 export default FancyDiv;
