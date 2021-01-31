@@ -21,10 +21,13 @@ const GridItem = (props: {
     <motion.div
       layoutId={props.layoutId}
       variants={item}
+      // whileHover={{ scale: 1.05 }}
+      // whileTap={{ scale: 0.95 }}
       style={{
         backgroundColor: props.backgroundColor,
         gridColumn: "span " + props.size,
         gridRow: "span " + props.size,
+        // borderRadius: 24,
       }}
       onClick={props.onSelect}
     >
