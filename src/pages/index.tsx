@@ -2,7 +2,7 @@ import React from "react";
 // import { useRouteData } from "react-static";
 // import { Post } from "types";
 import useMedia from "react-use/lib/useMedia";
-import { AnimateSharedLayout, motion } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import styled from "styled-components";
 
 const item = {
@@ -115,8 +115,8 @@ const container = {
   hide: {},
 };
 
-const xsGridItemSize = 144;
-const smGridItemSize = 144;
+const xsGridItemSize = 152;
+const smGridItemSize = 156;
 const mdGridItemSize = 202;
 const lgGridItemSize = 270;
 
@@ -126,14 +126,16 @@ const Container = styled(motion.div)({
   display: "grid",
   gridTemplateColumns: `repeat(2, ${xsGridItemSize}px)`,
   gridTemplateRows: `repeat(${xsGridItemSize}px)`,
-  columnGap: 30,
-  rowGap: 30,
+  columnGap: 15,
+  rowGap: 15,
   "@media (min-width: 680px)": {
     maxWidth: 668,
     gridTemplateColumns: `repeat(4, ${smGridItemSize}px)`,
     gridTemplateRows: `repeat(${smGridItemSize}px)`,
   },
   "@media (min-width: 960px)": {
+    columnGap: 30,
+    rowGap: 30,
     maxWidth: 900,
     gridTemplateColumns: `repeat(4, ${mdGridItemSize}px)`,
     gridTemplateRows: `repeat(${mdGridItemSize}px)`,
@@ -182,7 +184,7 @@ export default () => {
         />
       </Container>
 
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {selectedItem && (
           <motion.div
             style={{
@@ -260,7 +262,7 @@ export default () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </AnimateSharedLayout>
   );
 };
