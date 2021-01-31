@@ -1,9 +1,10 @@
 import React from "react";
 import { Root, Routes, addPrefetchExcludes } from "react-static";
 import { Link, Router } from "@reach/router";
-import FancyDiv from "components/FancyDiv";
 import Dynamic from "containers/Dynamic";
 import { Cursor } from "components/Cursor";
+import { DiscoverrLogo } from "components/DiscoverrLogo";
+import { hoverProps } from "components/Hoverable";
 
 import "./app.css";
 
@@ -14,6 +15,21 @@ addPrefetchExcludes(["dynamic"]);
 
 const TopBar = styled.nav({
   height: 150,
+  maxWidth: 1170,
+  margin: "auto auto",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+const StyledLink = styled(Link)({
+  fontFamily: "Poppins",
+  fontSize: 14,
+  fontWeight: 500,
+  color: "#000",
+  marginLeft: 22,
+  textDecoration: "none",
+  textTransform: "uppercase",
 });
 
 function App() {
@@ -21,23 +37,28 @@ function App() {
   return (
     <Root>
       <TopBar>
+        <DiscoverrLogo />
         <div>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/blog">Blog</Link>
-          <Link to="/dynamic">Dynamic</Link>
+          <StyledLink to="/" {...hoverProps}>
+            Home
+          </StyledLink>
+          <StyledLink to="/about" {...hoverProps}>
+            About
+          </StyledLink>
+          <StyledLink to="/blog" {...hoverProps}>
+            Blog
+          </StyledLink>
+          <StyledLink to="/dynamic" {...hoverProps}>
+            Dynamic
+          </StyledLink>
         </div>
       </TopBar>
-      <div className="content">
-        <FancyDiv>
-          <React.Suspense fallback={<em>Loading...</em>}>
-            <Router>
-              <Dynamic path="dynamic" />
-              <Routes path="*" />
-            </Router>
-          </React.Suspense>
-        </FancyDiv>
-      </div>
+      <React.Suspense fallback={<em>Loading...</em>}>
+        <Router>
+          <Dynamic path="dynamic" />
+          <Routes path="*" />
+        </Router>
+      </React.Suspense>
       {customCursorEnabled && <Cursor />}
     </Root>
   );

@@ -6,6 +6,7 @@ import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import styled from "styled-components";
 
 import { hoverProps } from "../components/Hoverable";
+import { DiscoverrLogo } from "../components/DiscoverrLogo";
 
 import { X } from "react-feather";
 import { RemoveScroll } from "react-remove-scroll";
@@ -30,8 +31,8 @@ const GridItem = (props: {
       // whileTap={{ scale: 0.95 }}
       style={{
         backgroundColor: props.backgroundColor,
-        // backgroundImage:
-        //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+        backgroundImage:
+          "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
         backgroundSize: "cover",
 
         gridColumn: "span " + props.size,
@@ -160,6 +161,15 @@ const Container = styled(motion.div)({
   },
 });
 
+const FooterBar = styled.div({
+  padding: "100px 0",
+  maxWidth: 1170,
+  margin: "auto auto",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
 export default () => {
   // const { posts }: { posts: Post[] } = useRouteData();
   const [selectedItem, setSelectedItem] = React.useState(null);
@@ -197,6 +207,23 @@ export default () => {
         />
       </Container>
 
+      <FooterBar>
+        <DiscoverrLogo />
+        <p
+          style={{
+            position: "relative",
+            fontSize: "16px",
+            fontFamily: "Montserrat",
+            lineHeight: 1.8,
+            margin: 0,
+            padding: 0,
+            paddingLeft: 100,
+            color: "#ccc",
+          }}
+        >
+          @ 2020, Discoverr. Lavet med passion af Discoverr.
+        </p>
+      </FooterBar>
       <AnimatePresence>
         {selectedItem && (
           <motion.div
@@ -269,10 +296,11 @@ export default () => {
                       minWidth: "329px",
                       height: "329px",
                       backgroundColor: selectedItem.backgroundColor,
-                      // backgroundImage:
-                      //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+                      backgroundImage:
+                        "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
                       backgroundSize: "cover",
                     }}
+                    onClick={() => setSelectedItem(null)}
                     {...hoverProps}
                   ></motion.div>
                   <div
