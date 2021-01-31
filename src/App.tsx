@@ -3,6 +3,9 @@ import { Root, Routes, addPrefetchExcludes } from "react-static";
 import { Link, Router } from "@reach/router";
 import FancyDiv from "components/FancyDiv";
 import Dynamic from "containers/Dynamic";
+import { Cursor } from "components/Cursor";
+
+import "./app.css";
 
 import styled from "styled-components";
 
@@ -14,6 +17,7 @@ const TopBar = styled.nav({
 });
 
 function App() {
+  const customCursorEnabled = true;
   return (
     <Root>
       <TopBar>
@@ -34,6 +38,7 @@ function App() {
           </React.Suspense>
         </FancyDiv>
       </div>
+      {customCursorEnabled && <Cursor />}
     </Root>
   );
 }

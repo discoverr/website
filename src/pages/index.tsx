@@ -5,6 +5,8 @@ import useMedia from "react-use/lib/useMedia";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import styled from "styled-components";
 
+import { hoverProps } from "../components/Hoverable";
+
 const item = {
   hidden: { opacity: 0 },
   enter: { opacity: 1 },
@@ -25,11 +27,16 @@ const GridItem = (props: {
       // whileTap={{ scale: 0.95 }}
       style={{
         backgroundColor: props.backgroundColor,
+        // backgroundImage:
+        //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+        backgroundSize: "cover",
+
         gridColumn: "span " + props.size,
         gridRow: "span " + props.size,
         // borderRadius: 24,
       }}
       onClick={props.onSelect}
+      {...hoverProps}
     >
       <div style={{ display: "block", width: "100%", paddingTop: "100%" }} />
     </motion.div>
@@ -218,6 +225,7 @@ export default () => {
               <button
                 style={{ position: "absolute", top: 30, right: 30 }}
                 onClick={() => setSelectedItem(null)}
+                {...hoverProps}
               >
                 Close
               </button>
@@ -247,7 +255,11 @@ export default () => {
                     minWidth: "329px",
                     height: "329px",
                     backgroundColor: selectedItem.backgroundColor,
+                    // backgroundImage:
+                    //   "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+                    backgroundSize: "cover",
                   }}
+                  {...hoverProps}
                 ></motion.div>
                 <div
                   style={{
@@ -277,6 +289,7 @@ export default () => {
                       margin: 0,
                       padding: 0,
                       paddingLeft: 100,
+                      color: "#444",
                     }}
                   >
                     <span

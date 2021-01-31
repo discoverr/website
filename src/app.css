@@ -1,0 +1,22 @@
+html,
+body {
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  /* border: 3px solid #fff; */
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+body.custom-cursor * {
+  cursor: none;
+}
