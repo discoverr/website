@@ -170,6 +170,22 @@ const PageContainer = styled(motion.div)({
   "@media (min-width: 1200px)": { maxWidth: 1100 },
 });
 
+const PageClose = styled.button({
+  position: "absolute",
+  zIndex: 10,
+  top: 15,
+  right: 15,
+  padding: 0,
+  margin: 0,
+  border: "none",
+  outline: "none",
+  backgroundColor: "transparent",
+  "@media (min-width: 480px)": {
+    top: 30,
+    right: 30,
+  },
+});
+
 const PageHero = styled(motion.div)({
   display: "flex",
   flexDirection: "column",
@@ -367,23 +383,9 @@ export default () => {
                 backgroundColor: "#fff",
               }}
             >
-              <button
-                style={{
-                  position: "absolute",
-                  zIndex: 10,
-                  top: 30,
-                  right: 30,
-                  padding: 0,
-                  margin: 0,
-                  border: "none",
-                  outline: "none",
-                  backgroundColor: "transparent",
-                }}
-                onClick={() => setSelectedItem(null)}
-                {...hoverProps}
-              >
+              <PageClose onClick={() => setSelectedItem(null)} {...hoverProps}>
                 <X size={40} />
-              </button>
+              </PageClose>
             </motion.div>
             <RemoveScroll>
               <PageContainer
