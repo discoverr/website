@@ -130,8 +130,8 @@ const container = {
 };
 
 const xsGridItemSize = 152;
-const smGridItemSize = 156;
-const mdGridItemSize = 202;
+const smGridItemSize = 210;
+const mdGridItemSize = 160;
 const lgGridItemSize = 270;
 
 const Container = styled(motion.div)({
@@ -142,15 +142,15 @@ const Container = styled(motion.div)({
   gridTemplateRows: `repeat(${xsGridItemSize}px)`,
   columnGap: 15,
   rowGap: 15,
-  "@media (min-width: 680px)": {
-    maxWidth: 668,
-    gridTemplateColumns: `repeat(4, ${smGridItemSize}px)`,
+  "@media (min-width: 480px)": {
+    maxWidth: 440,
+    gridTemplateColumns: `repeat(2, ${smGridItemSize}px)`,
     gridTemplateRows: `repeat(${smGridItemSize}px)`,
   },
-  "@media (min-width: 960px)": {
+  "@media (min-width: 768px)": {
+    maxWidth: 730,
     columnGap: 30,
     rowGap: 30,
-    maxWidth: 900,
     gridTemplateColumns: `repeat(4, ${mdGridItemSize}px)`,
     gridTemplateRows: `repeat(${mdGridItemSize}px)`,
   },
@@ -158,6 +158,121 @@ const Container = styled(motion.div)({
     maxWidth: 1170,
     gridTemplateColumns: `repeat(4, ${lgGridItemSize}px)`,
     gridTemplateRows: `repeat(${lgGridItemSize}px)`,
+  },
+});
+
+const PageContainer = styled(motion.div)({
+  maxWidth: 320,
+  position: "relative",
+  zIndex: 2,
+  "@media (min-width: 480px)": { maxWidth: 440 },
+  "@media (min-width: 768px)": { maxWidth: 730 },
+  "@media (min-width: 1200px)": { maxWidth: 1100 },
+});
+
+const PageHero = styled(motion.div)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  "@media (min-width: 480px)": {},
+  "@media (min-width: 768px)": {
+    flexDirection: "row",
+  },
+  "@media (min-width: 1200px)": {},
+});
+
+const xsPageItemSize = 210;
+const smPageItemSize = 240;
+const mdPageItemSize = 280;
+const lgPageItemSize = 330;
+
+const PageHeroImage = styled(motion.div)({
+  position: "relative",
+  width: xsPageItemSize,
+  minWidth: xsPageItemSize,
+  height: xsPageItemSize,
+  backgroundImage:
+    "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+  backgroundSize: "cover",
+  marginBottom: 50,
+  "@media (min-width: 480px)": {
+    width: smPageItemSize,
+    minWidth: smPageItemSize,
+    height: smPageItemSize,
+  },
+  "@media (min-width: 768px)": {
+    marginBottom: 0,
+    width: mdPageItemSize,
+    minWidth: mdPageItemSize,
+    height: mdPageItemSize,
+  },
+  "@media (min-width: 1200px)": {
+    width: lgPageItemSize,
+    minWidth: lgPageItemSize,
+    height: lgPageItemSize,
+  },
+});
+
+const PageHeroContent = styled.div({
+  paddingLeft: 0,
+  textAlign: "center",
+
+  "@media (min-width: 480px)": {},
+  "@media (min-width: 768px)": {
+    textAlign: "left",
+    paddingLeft: 30,
+  },
+  "@media (min-width: 1200px)": {
+    paddingLeft: 100,
+  },
+});
+
+const PageTitle = styled.h3({
+  margin: 0,
+  padding: 0,
+  paddingBottom: 20,
+  flexGrow: 1,
+  fontSize: 24,
+  fontFamily: "Montserrat",
+  fontWeight: 700,
+  "@media (min-width: 480px)": {
+    fontSize: 30,
+  },
+  "@media (min-width: 768px)": {
+    fontSize: 30,
+  },
+  "@media (min-width: 1200px)": {
+    paddingBottom: 60,
+    fontSize: 42,
+  },
+});
+
+const PageDescription = styled.p({
+  position: "relative",
+  fontSize: 14,
+  fontFamily: "Montserrat",
+  lineHeight: 1.8,
+  margin: 0,
+  padding: 0,
+  paddingLeft: 0,
+  color: "#444",
+
+  "@media (min-width: 480px)": {},
+  "@media (min-width: 768px)": {
+    fontSize: 16,
+    paddingLeft: 30,
+    "&:before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: 2,
+      height: 60,
+      backgroundColor: "#000",
+    },
+  },
+  "@media (min-width: 1200px)": {
+    paddingLeft: 100,
   },
 });
 
@@ -271,87 +386,31 @@ export default () => {
               </button>
             </motion.div>
             <RemoveScroll>
-              <motion.div
+              <PageContainer
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{
-                  maxWidth: 1100,
-                  position: "relative",
-                  zIndex: 2,
-                }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <motion.div
+                <PageHero>
+                  <PageHeroImage
                     layoutId={selectedItem.id}
-                    style={{
-                      position: "relative",
-                      width: "329px",
-                      minWidth: "329px",
-                      height: "329px",
-                      backgroundColor: selectedItem.backgroundColor,
-                      backgroundImage:
-                        "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
-                      backgroundSize: "cover",
-                    }}
                     onClick={() => setSelectedItem(null)}
                     {...hoverProps}
-                  ></motion.div>
-                  <div
-                    style={{
-                      paddingLeft: 90,
-                    }}
-                  >
-                    <h3
-                      style={{
-                        margin: 0,
-                        padding: 0,
-                        paddingBottom: 60,
-                        flexGrow: 1,
-                        fontSize: 42,
-                        fontFamily: "Montserrat",
-                        fontWeight: 700,
-                      }}
-                    >
+                  />
+                  <PageHeroContent>
+                    <PageTitle>
                       The public is more familiar with bad design than good
                       design.
-                    </h3>
-                    <p
-                      style={{
-                        position: "relative",
-                        fontSize: "16px",
-                        fontFamily: "Montserrat",
-                        lineHeight: 1.8,
-                        margin: 0,
-                        padding: 0,
-                        paddingLeft: 100,
-                        color: "#444",
-                      }}
-                    >
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          width: 2,
-                          height: 60,
-                          backgroundColor: "#000",
-                        }}
-                      ></span>
+                    </PageTitle>
+                    <PageDescription>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Vivamus non vulputate ipsum, id dignissim ante. Cras
                       posuere eros justo, pulvinar dignissim neque cursus non.
                       Ut sed purus vestibulum lacus tristique bibendum.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+                    </PageDescription>
+                  </PageHeroContent>
+                </PageHero>
+              </PageContainer>
             </RemoveScroll>
           </motion.div>
         )}
