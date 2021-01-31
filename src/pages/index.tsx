@@ -196,6 +196,10 @@ export default () => {
               right: 0,
               left: 0,
               bottom: 0,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <motion.div
@@ -210,15 +214,20 @@ export default () => {
                 left: 0,
                 backgroundColor: "#fff",
               }}
-            />
+            >
+              <button
+                style={{ position: "absolute", top: 30, right: 30 }}
+                onClick={() => setSelectedItem(null)}
+              >
+                Close
+              </button>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               style={{
-                maxWidth: 960,
-                margin: "auto auto",
-                paddingTop: 150,
+                maxWidth: 1100,
                 position: "relative",
                 zIndex: 2,
               }}
@@ -227,7 +236,7 @@ export default () => {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  alignItems: "flex-end",
+                  alignItems: "center",
                 }}
               >
                 <motion.div
@@ -240,27 +249,52 @@ export default () => {
                     backgroundColor: selectedItem.backgroundColor,
                   }}
                 ></motion.div>
-                <div>
+                <div
+                  style={{
+                    paddingLeft: 90,
+                  }}
+                >
                   <h3
                     style={{
                       margin: 0,
                       padding: 0,
-                      paddingLeft: 90,
+                      paddingBottom: 60,
                       flexGrow: 1,
                       fontSize: 42,
                       fontFamily: "Montserrat",
                       fontWeight: 700,
                     }}
                   >
-                    Historien om hvordan software blev kunst og discoverr blev
-                    artist.
+                    The public is more familiar with bad design than good
+                    design.
                   </h3>
+                  <p
+                    style={{
+                      position: "relative",
+                      fontSize: "16px",
+                      fontFamily: "Montserrat",
+                      lineHeight: 1.8,
+                      margin: 0,
+                      padding: 0,
+                      paddingLeft: 100,
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: 2,
+                        height: 60,
+                        backgroundColor: "#000",
+                      }}
+                    ></span>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vivamus non vulputate ipsum, id dignissim ante. Cras posuere
+                    eros justo, pulvinar dignissim neque cursus non. Ut sed
+                    purus vestibulum lacus tristique bibendum.
+                  </p>
                 </div>
-              </div>
-              <div>
-                <h5>{selectedItem.id}</h5>
-                <h2>{selectedItem.id}</h2>
-                <button onClick={() => setSelectedItem(null)}>Close</button>
               </div>
             </motion.div>
           </motion.div>
