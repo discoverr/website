@@ -1,7 +1,6 @@
 import React from "react";
-import { Root, Routes, addPrefetchExcludes } from "react-static";
+import { Root, Routes, addPrefetchExcludes,  } from "react-static";
 import { Link, Router } from "@reach/router";
-import Dynamic from "containers/Dynamic";
 import { Cursor } from "components/Cursor";
 import { DiscoverrLogo } from "components/DiscoverrLogo";
 import { hoverProps } from "components/Hoverable";
@@ -48,14 +47,10 @@ function App() {
           <StyledLink to="/blog" {...hoverProps}>
             Blog
           </StyledLink>
-          <StyledLink to="/dynamic" {...hoverProps}>
-            Dynamic
-          </StyledLink>
         </div>
       </TopBar>
       <React.Suspense fallback={<em>Loading...</em>}>
         <Router>
-          <Dynamic path="dynamic" />
           <Routes path="*" />
         </Router>
       </React.Suspense>

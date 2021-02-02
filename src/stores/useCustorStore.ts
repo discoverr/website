@@ -10,10 +10,12 @@ export const useCursorStore = create(
       visible: false,
     },
     (set, get) => ({
-      onMouseEnter: () => get().enabled && set({ hover: true }),
-      onMouseLeave: () => get().enabled && set({ hover: false }),
-      onMouseDown: () => get().enabled && set({ clicked: true, hover: false }),
-      onMouseUp: () => get().enabled && set({ clicked: false, hover: false }),
+      onMouseEnter: () => get().enabled && set({ hover: true, visible: true }),
+      onMouseLeave: () => get().enabled && set({ hover: false, visible: true }),
+      onMouseDown: () =>
+        get().enabled && set({ clicked: true, hover: false, visible: true }),
+      onMouseUp: () =>
+        get().enabled && set({ clicked: false, hover: false, visible: true }),
       hide: () => get().enabled && set({ visible: false }),
       show: () => get().enabled && set({ visible: true }),
       enable: () => set({ enabled: true }),

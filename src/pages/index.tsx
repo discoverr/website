@@ -11,6 +11,8 @@ import { DiscoverrLogo } from "../components/DiscoverrLogo";
 import { X } from "react-feather";
 import { RemoveScroll } from "react-remove-scroll";
 
+const gif = require("../assets/animated.gif");
+
 const item = {
   hidden: { opacity: 0 },
   enter: { opacity: 1 },
@@ -31,8 +33,7 @@ const GridItem = (props: {
       // whileTap={{ scale: 0.95 }}
       style={{
         backgroundColor: props.backgroundColor,
-        backgroundImage:
-          "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+        backgroundImage: "url('" + gif + "')",
         backgroundSize: "cover",
 
         gridColumn: "span " + props.size,
@@ -207,8 +208,7 @@ const PageHeroImage = styled(motion.div)({
   width: xsPageItemSize,
   minWidth: xsPageItemSize,
   height: xsPageItemSize,
-  backgroundImage:
-    "url('https://i.pinimg.com/originals/fc/68/f8/fc68f86873c9c661e84ad442cf8fb6cf.gif')",
+  backgroundImage: "url('" + gif + "')",
   backgroundSize: "cover",
   marginBottom: 50,
   "@media (min-width: 480px)": {
