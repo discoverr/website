@@ -11,7 +11,8 @@ import { DiscoverrLogo } from "../components/DiscoverrLogo";
 import { X } from "react-feather";
 import { RemoveScroll } from "react-remove-scroll";
 
-const gif = require("../assets/animated.gif");
+const bouncingShapes = require("../assets/bouncing-shapes.gif");
+const flower = require("../assets/flower.gif");
 
 const item = {
   hidden: { opacity: 0 },
@@ -23,6 +24,7 @@ const GridItem = (props: {
   layoutId: string;
   size: number;
   backgroundColor: string;
+  image: string;
   onSelect: () => void;
 }) => {
   return (
@@ -33,7 +35,7 @@ const GridItem = (props: {
       // whileTap={{ scale: 0.95 }}
       style={{
         backgroundColor: props.backgroundColor,
-        backgroundImage: "url('" + gif + "')",
+        backgroundImage: "url('" + props.image + "')",
         backgroundSize: "cover",
 
         gridColumn: "span " + props.size,
@@ -75,6 +77,7 @@ const GridSection = ({
           key={mainItem.id}
           layoutId={mainItem.id}
           backgroundColor={color}
+          image={mainItem.image}
           size={2}
           onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
         />
@@ -83,6 +86,7 @@ const GridSection = ({
         key={item1.id}
         layoutId={item1.id}
         backgroundColor={color}
+        image={item1.image}
         size={1}
         onSelect={() => onSelect({ ...item1, backgroundColor: color })}
       />
@@ -90,6 +94,7 @@ const GridSection = ({
         key={item2.id}
         layoutId={item2.id}
         backgroundColor={color}
+        image={item2.image}
         size={1}
         onSelect={() => onSelect({ ...item2, backgroundColor: color })}
       />
@@ -98,6 +103,7 @@ const GridSection = ({
           key={mainItem.id}
           layoutId={mainItem.id}
           backgroundColor={color}
+          image={mainItem.image}
           size={2}
           onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
         />
@@ -106,6 +112,7 @@ const GridSection = ({
         key={item3.id}
         layoutId={item3.id}
         backgroundColor={color}
+        image={item3.image}
         size={1}
         onSelect={() => onSelect({ ...item3, backgroundColor: color })}
       />
@@ -113,6 +120,7 @@ const GridSection = ({
         key={item4.id}
         layoutId={item4.id}
         backgroundColor={color}
+        image={item4.image}
         size={1}
         onSelect={() => onSelect({ ...item4, backgroundColor: color })}
       />
@@ -208,7 +216,7 @@ const PageHeroImage = styled(motion.div)({
   width: xsPageItemSize,
   minWidth: xsPageItemSize,
   height: xsPageItemSize,
-  backgroundImage: "url('" + gif + "')",
+  backgroundImage: "url('" + bouncingShapes + "')",
   backgroundSize: "cover",
   marginBottom: 50,
   "@media (min-width: 480px)": {
@@ -320,20 +328,20 @@ export default () => {
         <GridSection
           color="#000"
           mainItem={{ id: 1 }}
-          item1={{ id: 2 }}
-          item2={{ id: 3 }}
-          item3={{ id: 4 }}
-          item4={{ id: 5 }}
+          item1={{ id: 2, image: bouncingShapes }}
+          item2={{ id: 3, image: bouncingShapes }}
+          item3={{ id: 4, image: flower }}
+          item4={{ id: 5, image: bouncingShapes }}
           onSelect={setSelectedItem}
         />
         <GridSection
           color="#f2f2f2"
           mainRight
-          mainItem={{ id: 6 }}
-          item1={{ id: 7 }}
-          item2={{ id: 8 }}
-          item3={{ id: 9 }}
-          item4={{ id: 10 }}
+          mainItem={{ id: 6, image: bouncingShapes }}
+          item1={{ id: 7, image: bouncingShapes }}
+          item2={{ id: 8, image: bouncingShapes }}
+          item3={{ id: 9, image: bouncingShapes }}
+          item4={{ id: 10, image: bouncingShapes }}
           onSelect={setSelectedItem}
         />
       </Container>
