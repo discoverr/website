@@ -7,7 +7,12 @@ import styled from "styled-components";
 import { hoverProps } from "../components/Hoverable";
 import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
-import { GridSection, LargeItem } from "components/Grid";
+import {
+  FullWidthItem,
+  gridBorderRadius,
+  GridSection,
+  LargeItem,
+} from "components/Grid";
 import {
   PageContainer,
   PageDescription,
@@ -135,7 +140,7 @@ const SecondaryItem = (props: { backgroundColor: string }) => {
             fontFamily: "Poppins",
             lineHeight: "45px",
             padding: "0 30px",
-            borderRadius: 0,
+            borderRadius: gridBorderRadius / 2,
             textAlign: "center",
             backgroundColor: "#000",
             margin: "60px 0",
@@ -379,6 +384,39 @@ export default () => {
           item4={{ id: 5, icon: vcardSVG, Component: PlaneTile }}
           onSelect={setSelectedItem}
         />
+        <FullWidthItem backgroundColor="#222">
+          <div style={{ position: "relative" }}>
+            <div
+              style={{ display: "block", width: "100%", paddingTop: "50%" }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+              }}
+            >
+              <video
+                autoPlay
+                muted
+                loop
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: gridBorderRadius,
+                }}
+              >
+                <source
+                  src="https://previews.customer.envatousercontent.com/h264-video-previews/c61473fe-5bba-4b42-b4a1-6c061ea1cccf/21464794.mp4"
+                  type="video/mp4"
+                />
+              </video>
+            </div>
+          </div>
+        </FullWidthItem>
         <GridSection
           color="#f2f2f2"
           mainRight

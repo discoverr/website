@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { hoverProps } from "./Hoverable";
 import { OverlayPage } from "./Overlay";
 
-export const gridBorderRadius = 0;
+export const gridBorderRadius = 24;
 const item = {
   hidden: { opacity: 0 },
   enter: { opacity: 1 },
@@ -41,7 +41,6 @@ const GridItem = (props: {
         backgroundRepeat: "no-repeat",
         gridColumn: "span " + props.size,
         gridRow: "span " + props.size,
-        // borderRadius: 24,
       }}
       onClick={props.onSelect}
       {...hoverProps}
@@ -62,6 +61,25 @@ export const LargeItem = (props: {
         backgroundColor: props.backgroundColor,
         borderRadius: gridBorderRadius,
         gridColumn: "span 2",
+        gridRow: "span 2",
+      }}
+    >
+      {props.children}
+    </motion.div>
+  );
+};
+
+export const FullWidthItem = (props: {
+  backgroundColor: string;
+  children: any;
+}) => {
+  return (
+    <motion.div
+      variants={item}
+      style={{
+        backgroundColor: props.backgroundColor,
+        borderRadius: gridBorderRadius,
+        gridColumn: "span 4",
         gridRow: "span 2",
         // borderRadius: 24,
       }}
