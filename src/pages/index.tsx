@@ -1,317 +1,363 @@
 import React from "react";
 // import { useRouteData } from "react-static";
 // import { Post } from "types";
-import useMedia from "react-use/lib/useMedia";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import { AnimateSharedLayout } from "framer-motion";
 import styled from "styled-components";
 
 import { hoverProps } from "../components/Hoverable";
-import { DiscoverrLogo } from "../components/DiscoverrLogo";
+import { Container } from "../components/Container";
+import { Footer } from "../components/Footer";
+import { GridSection, LargeItem } from "components/Grid";
+import {
+  PageContainer,
+  PageDescription,
+  PageHero,
+  PageHeroContent,
+  PageHeroImage,
+  PageTitle,
+} from "components/Page";
+import { OverlayPage, Overlay } from "components/Overlay";
 
-import { X } from "react-feather";
-import { RemoveScroll } from "react-remove-scroll";
+const brainSVG = require("../assets/brain.svg");
+// const usersSVG = require("../assets/users.svg");
+const playSVG = require("../assets/play.svg");
+// const mailSVG = require("../assets/mail.svg");
+const heartSVG = require("../assets/heart.svg");
+const vcardSVG = require("../assets/vcard.svg");
 
-const bouncingShapes = require("../assets/bouncing-shapes.gif");
-const flower = require("../assets/flower.gif");
-
-const item = {
-  hidden: { opacity: 0 },
-  enter: { opacity: 1 },
-  hide: { opacity: 1 },
+const MainItem = (props: { backgroundColor: string }) => {
+  return (
+    <LargeItem backgroundColor={props.backgroundColor}>
+      <div
+        style={{
+          margin: "auto",
+          padding: 50,
+          display: "block",
+          marginTop: 0,
+          marginLeft: 0,
+        }}
+      >
+        <h4
+          style={{
+            color: "#fff",
+            fontSize: 54,
+            fontWeight: 300,
+            fontFamily: "Montserrat",
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          Hvor software bliver til <b>kunst</b> og kunder bliver til{" "}
+          <b>venner</b>.
+        </h4>
+        <hr
+          style={{
+            backgroundColor: "#fff",
+            height: 2,
+            width: 60,
+            border: "none",
+            margin: "50px 0",
+            display: "block",
+          }}
+        />
+      </div>
+    </LargeItem>
+  );
 };
 
-const GridItem = (props: {
-  layoutId: string;
-  size: number;
-  backgroundColor: string;
-  image: string;
-  onSelect: () => void;
-}) => {
+const StyledLinkList = styled.ul({
+  display: "table",
+  margin: 0,
+  padding: 0,
+  "& > li": {
+    position: "relative",
+    marginRight: 20,
+    paddingRight: 20,
+    float: "left",
+    display: "inline-block",
+    listStyle: "none",
+  },
+  "& > li > a, & > li > button": {
+    display: "block",
+    fontWeight: 500,
+    position: "relative",
+    color: "#000000",
+    textDecoration: "none",
+    fontFamily: '"Poppins", sans-serif',
+    fontSize: 14,
+  },
+  "& > li:after": {
+    top: "50%",
+    right: "-2px",
+    width: "4px",
+    height: "4px",
+    content: '""',
+    lineHeight: 1,
+    position: "absolute",
+    borderRadius: "100%",
+    backgroundColor: "#dddddd",
+    transform: "translateY(-50%)",
+  },
+});
+
+const SecondaryItem = (props: { backgroundColor: string }) => {
   return (
-    <motion.div
-      layoutId={props.layoutId}
-      variants={item}
-      // whileHover={{ scale: 1.05 }}
-      // whileTap={{ scale: 0.95 }}
+    <LargeItem backgroundColor={props.backgroundColor}>
+      <div
+        style={{
+          margin: "auto",
+          padding: 50,
+          display: "block",
+          marginTop: 0,
+          marginLeft: 0,
+        }}
+      >
+        <h4
+          style={{
+            color: "#000",
+            fontSize: 54,
+            fontWeight: 300,
+            fontFamily: "Montserrat",
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          Vi er stolte over <b>100%</b> kunde tilfredshed lige siden{" "}
+          <b>12.12.12</b>
+        </h4>
+        <button
+          style={{
+            color: "#fff",
+            height: 45,
+            border: "none",
+            fontSize: 14,
+            fontWeight: 500,
+            fontFamily: "Poppins",
+            lineHeight: "45px",
+            padding: "0 30px",
+            borderRadius: 0,
+            textAlign: "center",
+            backgroundColor: "#000",
+            margin: "60px 0",
+          }}
+          {...hoverProps}
+        >
+          Let's Talk
+        </button>
+        <StyledLinkList>
+          <li>
+            <a href="#" {...hoverProps}>
+              Facebook
+            </a>
+          </li>
+          <li>
+            <a href="#" {...hoverProps}>
+              Facebook
+            </a>
+          </li>
+          <li>
+            <a href="#" {...hoverProps}>
+              Facebook
+            </a>
+          </li>
+        </StyledLinkList>
+      </div>
+    </LargeItem>
+  );
+};
+
+const VideoTile = ({}: { page: OverlayPage; onClose: () => void }) => (
+  <PageContainer
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <div
       style={{
-        backgroundColor: props.backgroundColor,
-        backgroundImage: "url('" + props.image + "')",
-        backgroundSize: "cover",
-
-        gridColumn: "span " + props.size,
-        gridRow: "span " + props.size,
-        // borderRadius: 24,
+        maxWidth: "100%",
+        width: 1200,
       }}
-      onClick={props.onSelect}
-      {...hoverProps}
     >
-      <div style={{ display: "block", width: "100%", paddingTop: "100%" }} />
-    </motion.div>
-  );
-};
+      <iframe
+        src="https://www.youtube.com/embed/jk6sz25OZgw?controls=0"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{
+          height: 600,
+          backgroundColor: "black",
+          width: "100%",
+        }}
+      ></iframe>
+    </div>
+  </PageContainer>
+);
 
-const GridSection = ({
-  color,
-  mainRight,
-  mainItem,
-  item1,
-  item2,
-  item3,
-  item4,
-  onSelect,
+const BrainTile = ({
+  page,
+  onClose,
 }: {
-  color: string;
-  mainRight?: boolean;
-  mainItem: any;
-  item1: any;
-  item2: any;
-  item3: any;
-  item4: any;
-  onSelect: (item: any) => void;
-}) => {
-  const isOverXS = useMedia("(min-width: 680px)");
-  return (
-    <React.Fragment>
-      {(!mainRight || !isOverXS) && (
-        <GridItem
-          key={mainItem.id}
-          layoutId={mainItem.id}
-          backgroundColor={color}
-          image={mainItem.image}
-          size={2}
-          onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
-        />
-      )}
-      <GridItem
-        key={item1.id}
-        layoutId={item1.id}
-        backgroundColor={color}
-        image={item1.image}
-        size={1}
-        onSelect={() => onSelect({ ...item1, backgroundColor: color })}
+  page: OverlayPage;
+  onClose: () => void;
+}) => (
+  <PageContainer
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <PageHero>
+      <PageHeroImage
+        layoutId={`${page.id}`}
+        onClick={onClose}
+        style={{
+          backgroundColor: page.backgroundColor,
+          backgroundImage: page.icon
+            ? "url('" + page.icon + "')"
+            : page.image
+            ? "url('" + page.image + "')"
+            : undefined,
+          backgroundSize: page.icon ? "50%" : page.image ? "100%" : undefined,
+        }}
+        {...hoverProps}
       />
-      <GridItem
-        key={item2.id}
-        layoutId={item2.id}
-        backgroundColor={color}
-        image={item2.image}
-        size={1}
-        onSelect={() => onSelect({ ...item2, backgroundColor: color })}
+      <PageHeroContent>
+        <PageTitle>
+          The public is more familiar with bad design than good design.
+        </PageTitle>
+        <PageDescription>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non
+          vulputate ipsum, id dignissim ante. Cras posuere eros justo, pulvinar
+          dignissim neque cursus non. Ut sed purus vestibulum lacus tristique
+          bibendum.
+        </PageDescription>
+      </PageHeroContent>
+    </PageHero>
+  </PageContainer>
+);
+
+const PeopleTile = ({
+  page,
+  onClose,
+}: {
+  page: OverlayPage;
+  onClose: () => void;
+}) => (
+  <PageContainer
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <PageHero>
+      <PageHeroImage
+        layoutId={`${page.id}`}
+        onClick={onClose}
+        style={{
+          backgroundColor: page.backgroundColor,
+          backgroundImage: page.icon
+            ? "url('" + page.icon + "')"
+            : page.image
+            ? "url('" + page.image + "')"
+            : undefined,
+          backgroundSize: page.icon ? "50%" : page.image ? "100%" : undefined,
+        }}
+        {...hoverProps}
       />
-      {mainRight && isOverXS && (
-        <GridItem
-          key={mainItem.id}
-          layoutId={mainItem.id}
-          backgroundColor={color}
-          image={mainItem.image}
-          size={2}
-          onSelect={() => onSelect({ ...mainItem, backgroundColor: color })}
-        />
-      )}
-      <GridItem
-        key={item3.id}
-        layoutId={item3.id}
-        backgroundColor={color}
-        image={item3.image}
-        size={1}
-        onSelect={() => onSelect({ ...item3, backgroundColor: color })}
+      <PageHeroContent>
+        <PageTitle>
+          The public is more familiar with bad design than good design.
+        </PageTitle>
+        <PageDescription>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non
+          vulputate ipsum, id dignissim ante. Cras posuere eros justo, pulvinar
+          dignissim neque cursus non. Ut sed purus vestibulum lacus tristique
+          bibendum.
+        </PageDescription>
+      </PageHeroContent>
+    </PageHero>
+    <div
+      style={{
+        marginTop: 100,
+      }}
+    >
+      <iframe
+        src="https://www.youtube.com/embed/jk6sz25OZgw?controls=0"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{
+          height: 600,
+          backgroundColor: "black",
+          width: "100%",
+        }}
+      ></iframe>
+    </div>
+  </PageContainer>
+);
+
+const PlaneTile = ({
+  page,
+  onClose,
+}: {
+  page: OverlayPage;
+  onClose: () => void;
+}) => (
+  <PageContainer
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <PageHero>
+      <PageHeroImage
+        layoutId={`${page.id}`}
+        onClick={onClose}
+        style={{
+          backgroundColor: page.backgroundColor,
+          backgroundImage: page.icon
+            ? "url('" + page.icon + "')"
+            : page.image
+            ? "url('" + page.image + "')"
+            : undefined,
+          backgroundSize: page.icon ? "50%" : page.image ? "100%" : undefined,
+        }}
+        {...hoverProps}
       />
-      <GridItem
-        key={item4.id}
-        layoutId={item4.id}
-        backgroundColor={color}
-        image={item4.image}
-        size={1}
-        onSelect={() => onSelect({ ...item4, backgroundColor: color })}
-      />
-    </React.Fragment>
-  );
-};
-
-const container = {
-  hidden: {},
-  enter: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-  hide: {},
-};
-
-const xsGridItemSize = 152;
-const smGridItemSize = 210;
-const mdGridItemSize = 160;
-const lgGridItemSize = 270;
-
-const Container = styled(motion.div)({
-  maxWidth: 320,
-  margin: "auto auto",
-  display: "grid",
-  gridTemplateColumns: `repeat(2, ${xsGridItemSize}px)`,
-  gridTemplateRows: `repeat(${xsGridItemSize}px)`,
-  columnGap: 15,
-  rowGap: 15,
-  "@media (min-width: 480px)": {
-    maxWidth: 440,
-    gridTemplateColumns: `repeat(2, ${smGridItemSize}px)`,
-    gridTemplateRows: `repeat(${smGridItemSize}px)`,
-  },
-  "@media (min-width: 768px)": {
-    maxWidth: 730,
-    columnGap: 30,
-    rowGap: 30,
-    gridTemplateColumns: `repeat(4, ${mdGridItemSize}px)`,
-    gridTemplateRows: `repeat(${mdGridItemSize}px)`,
-  },
-  "@media (min-width: 1200px)": {
-    maxWidth: 1170,
-    gridTemplateColumns: `repeat(4, ${lgGridItemSize}px)`,
-    gridTemplateRows: `repeat(${lgGridItemSize}px)`,
-  },
-});
-
-const PageContainer = styled(motion.div)({
-  maxWidth: 320,
-  position: "relative",
-  zIndex: 2,
-  "@media (min-width: 480px)": { maxWidth: 440 },
-  "@media (min-width: 768px)": { maxWidth: 730 },
-  "@media (min-width: 1200px)": { maxWidth: 1100 },
-});
-
-const PageClose = styled.button({
-  position: "absolute",
-  zIndex: 10,
-  top: 15,
-  right: 15,
-  padding: 0,
-  margin: 0,
-  border: "none",
-  outline: "none",
-  backgroundColor: "transparent",
-  "@media (min-width: 480px)": {
-    top: 30,
-    right: 30,
-  },
-});
-
-const PageHero = styled(motion.div)({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  "@media (min-width: 480px)": {},
-  "@media (min-width: 768px)": {
-    flexDirection: "row",
-  },
-  "@media (min-width: 1200px)": {},
-});
-
-const xsPageItemSize = 190;
-const smPageItemSize = 240;
-const mdPageItemSize = 280;
-const lgPageItemSize = 330;
-
-const PageHeroImage = styled(motion.div)({
-  position: "relative",
-  width: xsPageItemSize,
-  minWidth: xsPageItemSize,
-  height: xsPageItemSize,
-  backgroundImage: "url('" + bouncingShapes + "')",
-  backgroundSize: "cover",
-  marginBottom: 50,
-  "@media (min-width: 480px)": {
-    width: smPageItemSize,
-    minWidth: smPageItemSize,
-    height: smPageItemSize,
-  },
-  "@media (min-width: 768px)": {
-    marginBottom: 0,
-    width: mdPageItemSize,
-    minWidth: mdPageItemSize,
-    height: mdPageItemSize,
-  },
-  "@media (min-width: 1200px)": {
-    width: lgPageItemSize,
-    minWidth: lgPageItemSize,
-    height: lgPageItemSize,
-  },
-});
-
-const PageHeroContent = styled.div({
-  paddingLeft: 0,
-  textAlign: "center",
-
-  "@media (min-width: 480px)": {},
-  "@media (min-width: 768px)": {
-    textAlign: "left",
-    paddingLeft: 30,
-  },
-  "@media (min-width: 1200px)": {
-    paddingLeft: 100,
-  },
-});
-
-const PageTitle = styled.h3({
-  margin: 0,
-  padding: 0,
-  paddingBottom: 20,
-  flexGrow: 1,
-  fontSize: 24,
-  fontFamily: "Montserrat",
-  fontWeight: 700,
-  "@media (min-width: 480px)": {
-    fontSize: 30,
-  },
-  "@media (min-width: 768px)": {
-    fontSize: 30,
-  },
-  "@media (min-width: 1200px)": {
-    paddingBottom: 60,
-    fontSize: 42,
-  },
-});
-
-const PageDescription = styled.p({
-  position: "relative",
-  fontSize: 14,
-  fontFamily: "Montserrat",
-  lineHeight: 1.8,
-  margin: 0,
-  padding: 0,
-  paddingLeft: 0,
-  color: "#444",
-
-  "@media (min-width: 480px)": {},
-  "@media (min-width: 768px)": {
-    fontSize: 16,
-    paddingLeft: 30,
-    "&:before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: 2,
-      height: 60,
-      backgroundColor: "#000",
-    },
-  },
-  "@media (min-width: 1200px)": {
-    paddingLeft: 100,
-  },
-});
-
-const FooterBar = styled.div({
-  padding: "100px 0",
-  maxWidth: 1170,
-  margin: "auto auto",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
+      <PageHeroContent>
+        <PageTitle>
+          The public is more familiar with bad design than good design.
+        </PageTitle>
+        <PageDescription>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non
+          vulputate ipsum, id dignissim ante. Cras posuere eros justo, pulvinar
+          dignissim neque cursus non. Ut sed purus vestibulum lacus tristique
+          bibendum.
+        </PageDescription>
+      </PageHeroContent>
+    </PageHero>
+    <div
+      style={{
+        marginTop: 100,
+      }}
+    >
+      <iframe
+        src="https://www.youtube.com/embed/jk6sz25OZgw?controls=0"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{
+          height: 600,
+          backgroundColor: "black",
+          width: "100%",
+        }}
+      ></iframe>
+    </div>
+  </PageContainer>
+);
 
 export default () => {
   // const { posts }: { posts: Post[] } = useRouteData();
-  const [selectedItem, setSelectedItem] = React.useState(null);
+  const [selectedItem, setSelectedItem] = React.useState<OverlayPage | null>(
+    null
+  );
   const enteredRed = React.useRef(false);
 
   if (selectedItem) {
@@ -321,110 +367,52 @@ export default () => {
   return (
     <AnimateSharedLayout type="crossfade">
       <Container
-        variants={container}
         initial="hidden"
         animate={selectedItem === null ? "enter" : "hide"}
       >
         <GridSection
           color="#000"
-          mainItem={{ id: 1 }}
-          item1={{ id: 2, image: bouncingShapes }}
-          item2={{ id: 3, image: bouncingShapes }}
-          item3={{ id: 4, image: flower }}
-          item4={{ id: 5, image: bouncingShapes }}
+          mainItem={<MainItem backgroundColor="#000" />}
+          item1={{ id: 2, icon: playSVG, Component: VideoTile }}
+          item2={{ id: 3, icon: brainSVG, Component: BrainTile }}
+          item3={{ id: 4, icon: heartSVG, Component: PeopleTile }}
+          item4={{ id: 5, icon: vcardSVG, Component: PlaneTile }}
           onSelect={setSelectedItem}
         />
         <GridSection
           color="#f2f2f2"
           mainRight
-          mainItem={{ id: 6, image: bouncingShapes }}
-          item1={{ id: 7, image: bouncingShapes }}
-          item2={{ id: 8, image: bouncingShapes }}
-          item3={{ id: 9, image: bouncingShapes }}
-          item4={{ id: 10, image: bouncingShapes }}
+          mainItem={<SecondaryItem backgroundColor="#eee" />}
+          item1={{
+            id: 7,
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB16S8HQZMkH8NFwn4pOL4TtDxfLKG8zHgig&usqp=CAU",
+            Component: PlaneTile,
+          }}
+          item2={{
+            id: 8,
+            image:
+              "https://festivalofauthors.ca/wp-content/uploads/2020/10/Cardinal-Cliff-Headshot_square.png",
+            Component: PlaneTile,
+          }}
+          item3={{
+            id: 9,
+            image:
+              "https://www.tedxmarin.org/wp-content/uploads/Headshot-Harash-300px-square.jpg",
+            Component: PlaneTile,
+          }}
+          item4={{
+            id: 10,
+            image:
+              "https://www.psrbrokerage.com/wp-content/uploads/alex-earthy-headshot-square.png",
+            Component: PlaneTile,
+          }}
           onSelect={setSelectedItem}
         />
       </Container>
 
-      <FooterBar>
-        <DiscoverrLogo />
-        <p
-          style={{
-            position: "relative",
-            fontSize: "16px",
-            fontFamily: "Montserrat",
-            lineHeight: 1.8,
-            margin: 0,
-            padding: 0,
-            paddingLeft: 100,
-            color: "#ccc",
-          }}
-        >
-          @ 2020, Discoverr. Lavet med passion af Discoverr.
-        </p>
-      </FooterBar>
-      <AnimatePresence>
-        {selectedItem && (
-          <motion.div
-            style={{
-              position: "fixed",
-              top: 0,
-              right: 0,
-              left: 0,
-              bottom: 0,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                backgroundColor: "#fff",
-              }}
-            >
-              <PageClose onClick={() => setSelectedItem(null)} {...hoverProps}>
-                <X size={40} />
-              </PageClose>
-            </motion.div>
-            <RemoveScroll>
-              <PageContainer
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <PageHero>
-                  <PageHeroImage
-                    layoutId={selectedItem.id}
-                    onClick={() => setSelectedItem(null)}
-                    {...hoverProps}
-                  />
-                  <PageHeroContent>
-                    <PageTitle>
-                      The public is more familiar with bad design than good
-                      design.
-                    </PageTitle>
-                    <PageDescription>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vivamus non vulputate ipsum, id dignissim ante. Cras
-                      posuere eros justo, pulvinar dignissim neque cursus non.
-                      Ut sed purus vestibulum lacus tristique bibendum.
-                    </PageDescription>
-                  </PageHeroContent>
-                </PageHero>
-              </PageContainer>
-            </RemoveScroll>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Footer />
+      <Overlay page={selectedItem} onClose={() => setSelectedItem(null)} />
     </AnimateSharedLayout>
   );
 };
