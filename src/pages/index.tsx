@@ -1,7 +1,9 @@
 import React from "react";
 // import { useRouteData } from "react-static";
 // import { Post } from "types";
-import { AnimateSharedLayout } from "framer-motion";
+
+import { Volume2 } from "react-feather";
+import { AnimateSharedLayout, motion, useAnimation } from "framer-motion";
 import styled from "styled-components";
 
 import { hoverProps } from "../components/Hoverable";
@@ -22,6 +24,11 @@ import {
   PageTitle,
 } from "components/Page";
 import { OverlayPage, Overlay } from "components/Overlay";
+import { useInView } from "react-intersection-observer";
+
+import Slider, { CustomArrowProps } from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const brainSVG = require("../assets/brain.svg");
 // const usersSVG = require("../assets/users.svg");
@@ -240,6 +247,39 @@ const BrainTile = ({
   </PageContainer>
 );
 
+const SampleNextArrow = (props: CustomArrowProps) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    />
+  );
+};
+
+const SamplePrevArrow = (props: CustomArrowProps) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+};
+
+var settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+};
+
 const PeopleTile = ({
   page,
   onClose,
@@ -279,23 +319,26 @@ const PeopleTile = ({
         </PageDescription>
       </PageHeroContent>
     </PageHero>
-    <div
-      style={{
-        marginTop: 100,
-      }}
-    >
-      <iframe
-        src="https://www.youtube.com/embed/jk6sz25OZgw?controls=0"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        style={{
-          height: 600,
-          backgroundColor: "black",
-          width: "100%",
-        }}
-      ></iframe>
-    </div>
+    <Slider {...settings}>
+      <div>
+        <h3>1</h3>
+      </div>
+      <div>
+        <h3>2</h3>
+      </div>
+      <div>
+        <h3>3</h3>
+      </div>
+      <div>
+        <h3>4</h3>
+      </div>
+      <div>
+        <h3>5</h3>
+      </div>
+      <div>
+        <h3>6</h3>
+      </div>
+    </Slider>
   </PageContainer>
 );
 
@@ -358,6 +401,96 @@ const PlaneTile = ({
   </PageContainer>
 );
 
+const variants = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
+
+const Player = () => {
+  const muteTimerRef = React.useRef<NodeJS.Timeout>();
+  const playerRef = React.useRef<HTMLVideoElement>();
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 0.9,
+  });
+  const controls = useAnimation();
+  React.useEffect(() => {
+    if (inView) {
+      handleShowMute();
+      playerRef.current.play();
+    } else {
+      playerRef.current.pause();
+    }
+  }, [inView]);
+
+  const handleShowMute = () => {
+    if (muteTimerRef.current) clearTimeout(muteTimerRef.current);
+    controls.start("visible");
+    muteTimerRef.current = setTimeout(() => {
+      controls.start("hidden");
+    }, 2000);
+  };
+
+  const handleMute = () => {
+    playerRef.current.muted = !playerRef.current.muted;
+  };
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+      }}
+      onMouseMove={handleShowMute}
+      onMouseLeave={() => controls.start("hidden")}
+    >
+      <video
+        ref={playerRef}
+        loop
+        muted
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          borderRadius: gridBorderRadius,
+        }}
+      >
+        <source
+          src="https://previews.customer.envatousercontent.com/h264-video-previews/65102354-7ae4-4d1b-935e-d0bbdb6b9675/31285894.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <motion.button
+        variants={variants}
+        animate={controls}
+        initial="hidden"
+        whileHover={{
+          opacity: 1,
+          scale: 1.1,
+        }}
+        whileTap={{ opacity: 1, scale: 1.3 }}
+        style={{
+          position: "absolute",
+          right: 24,
+          bottom: 24,
+          border: "none",
+          backgroundColor: "rgba(66,66,66,0.7)",
+          padding: 16,
+          borderRadius: 16,
+          color: "#fff",
+          width: 64,
+          height: 64,
+        }}
+        onClick={handleMute}
+        {...hoverProps}
+      >
+        <Volume2 />
+      </motion.button>
+    </div>
+  );
+};
+
 export default () => {
   // const { posts }: { posts: Post[] } = useRouteData();
   const [selectedItem, setSelectedItem] = React.useState<OverlayPage | null>(
@@ -398,22 +531,7 @@ export default () => {
                 left: 0,
               }}
             >
-              <video
-                autoPlay
-                muted
-                loop
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: gridBorderRadius,
-                }}
-              >
-                <source
-                  src="https://previews.customer.envatousercontent.com/h264-video-previews/c61473fe-5bba-4b42-b4a1-6c061ea1cccf/21464794.mp4"
-                  type="video/mp4"
-                />
-              </video>
+              <Player />
             </div>
           </div>
         </FullWidthItem>
@@ -425,25 +543,25 @@ export default () => {
             id: 7,
             image:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB16S8HQZMkH8NFwn4pOL4TtDxfLKG8zHgig&usqp=CAU",
-            Component: PlaneTile,
+            Component: BrainTile,
           }}
           item2={{
             id: 8,
             image:
               "https://festivalofauthors.ca/wp-content/uploads/2020/10/Cardinal-Cliff-Headshot_square.png",
-            Component: PlaneTile,
+            Component: BrainTile,
           }}
           item3={{
             id: 9,
             image:
               "https://www.tedxmarin.org/wp-content/uploads/Headshot-Harash-300px-square.jpg",
-            Component: PlaneTile,
+            Component: BrainTile,
           }}
           item4={{
             id: 10,
             image:
               "https://www.psrbrokerage.com/wp-content/uploads/alex-earthy-headshot-square.png",
-            Component: PlaneTile,
+            Component: BrainTile,
           }}
           onSelect={setSelectedItem}
         />
